@@ -10,7 +10,19 @@ const userSchema = new mongoose.Schema(
                 type: mongoose.Schema.Types.ObjectId,
                 ref: 'trails'
             }
-        ], 
+        ],
+        campgrounds: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'campgrounds'
+            }
+        ],
+        nationalParks: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'nationalParks'
+            }
+        ] 
     },
     {
         toJSON: {
