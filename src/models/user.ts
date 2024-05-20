@@ -2,6 +2,8 @@ import mongoose, { Document } from 'mongoose';
 
 const userSchema = new mongoose.Schema(
     {
+        firstName: String,
+        lastName: String,
         username: String,
         email: String,
         password: String,
@@ -33,11 +35,16 @@ const userSchema = new mongoose.Schema(
     }
 );
 
+
 interface UserDocument extends Document {
     username: string;
     email: string;
     password: string;
+    firstName: string;
+    lastName: string;
     trails: mongoose.Types.ObjectId[];
 }
 
-export default mongoose.model<UserDocument>('User', userSchema);
+const User = mongoose.model<UserDocument>('User', userSchema);
+
+export { User, UserDocument }; 
