@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">92% </span>
+                <span class="strong">91.17% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>23/25</span>
+                <span class='fraction'>31/34</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>5/5</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>4/4</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">91.3% </span>
+                <span class="strong">90.32% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>21/23</span>
+                <span class='fraction'>28/31</span>
             </div>
         
             
@@ -106,8 +106,27 @@
 <a name='L41'></a><a href='#L41'>41</a>
 <a name='L42'></a><a href='#L42'>42</a>
 <a name='L43'></a><a href='#L43'>43</a>
-<a name='L44'></a><a href='#L44'>44</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
+<a name='L44'></a><a href='#L44'>44</a>
+<a name='L45'></a><a href='#L45'>45</a>
+<a name='L46'></a><a href='#L46'>46</a>
+<a name='L47'></a><a href='#L47'>47</a>
+<a name='L48'></a><a href='#L48'>48</a>
+<a name='L49'></a><a href='#L49'>49</a>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
@@ -146,14 +165,32 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span></td><td class="text"><pre class="prettyprint lang-js">import { Router, Request, Response } from "express";
-import NationalParksFetcher from "../../Handlers/nationalParksHandler";
+import NationalParksFetcher from "../../utils/nationalParksHandler";
+import { RecordWithTtl } from "dns";
 const router: Router = Router();
 &nbsp;
-router.get("/parks", async (req, res) =&gt; {
+router.get("/parks", async (req: Request, res: Response) =&gt; {
   const { page, limit } = req.query;
 &nbsp;
   if (!page || !limit) {
@@ -180,7 +217,7 @@ router.get("/parks", async (req, res) =&gt; {
 });
 &nbsp;
 // Route to find trails
-router.get("/trails", async (req, res) =&gt; {
+router.get("/trails", async (req: Request, res: Response): Promise&lt;any&gt; =&gt; {
   try {
     const trails = await NationalParksFetcher.findTrails();
     if (trails === "error") {
@@ -192,6 +229,23 @@ router.get("/trails", async (req, res) =&gt; {
   }
 });
 &nbsp;
+router.get('/campgrounds/:stateCode', async (req: Request, res: Response): Promise&lt;any&gt; =&gt; {
+  try {
+    const stateCode: string = req.params.stateCode;
+    const campgroundData = await NationalParksFetcher.findCampgrounds(stateCode);
+&nbsp;
+    if(campgroundData === 'error') {
+      return res.status(500).send({ message: "Error fetching campgrounds" });
+    }
+&nbsp;
+    res.status(200).json(campgroundData);
+  } catch (error) {
+<span class="cstat-no" title="statement not covered" >    res.status(500).send({ message: "Server error", error });</span>
+  }
+})
+&nbsp;
+&nbsp;
+&nbsp;
 export default router;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -199,7 +253,7 @@ export default router;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-05-20T21:16:04.052Z
+                at 2024-05-21T16:51:48.281Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

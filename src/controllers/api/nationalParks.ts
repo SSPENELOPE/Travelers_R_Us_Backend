@@ -1,8 +1,9 @@
 import { Router, Request, Response } from "express";
-import NationalParksFetcher from "../../Handlers/nationalParksHandler";
+import NationalParksFetcher from "../../utils/nationalParksHandler";
+import { RecordWithTtl } from "dns";
 const router: Router = Router();
 
-router.get("/parks", async (req, res) => {
+router.get("/parks", async (req: Request, res: Response) => {
   const { page, limit } = req.query;
 
   if (!page || !limit) {
@@ -29,7 +30,7 @@ router.get("/parks", async (req, res) => {
 });
 
 // Route to find trails
-router.get("/trails", async (req, res) => {
+router.get("/trails", async (req: Request, res: Response): Promise<any> => {
   try {
     const trails = await NationalParksFetcher.findTrails();
     if (trails === "error") {
@@ -40,5 +41,22 @@ router.get("/trails", async (req, res) => {
     res.status(500).send({ message: "Server error", error });
   }
 });
+
+router.get('/campgrounds/:stateCode', async (req: Request, res: Response): Promise<any> => {
+  try {
+    const stateCode: string = req.params.stateCode;
+    const campgroundData = await NationalParksFetcher.findCampgrounds(stateCode);
+
+    if(campgroundData === 'error') {
+      return res.status(500).send({ message: "Error fetching campgrounds" });
+    }
+
+    res.status(200).json(campgroundData);
+  } catch (error) {
+    res.status(500).send({ message: "Server error", error });
+  }
+})
+
+
 
 export default router;
