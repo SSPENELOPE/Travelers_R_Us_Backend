@@ -1,9 +1,9 @@
 import { Router, Request, Response } from "express";
 import NationalParksFetcher from "../../utils/nationalParksHandler";
-import { RecordWithTtl } from "dns";
 const router: Router = Router();
 
-router.get("/parks", async (req: Request, res: Response) => {
+// Route to find parks
+router.get("/parks", async (req: Request, res: Response): Promise<any> => {
   const { page, limit } = req.query;
 
   if (!page || !limit) {
@@ -16,11 +16,11 @@ router.get("/parks", async (req: Request, res: Response) => {
   const limitNumber = parseInt(limit as string, 10);
 
   try {
-    const parks = await NationalParksFetcher.fetchParks(
+    const parks: Promise<any> = await NationalParksFetcher.fetchParks(
       pageNumber,
       limitNumber
     );
-    if (parks === "error") {
+    if (await parks === "error") {
       return res.status(500).send({ message: "Error fetching parks" });
     }
     res.status(200).send(parks);
@@ -32,8 +32,8 @@ router.get("/parks", async (req: Request, res: Response) => {
 // Route to find trails
 router.get("/trails", async (req: Request, res: Response): Promise<any> => {
   try {
-    const trails = await NationalParksFetcher.findTrails();
-    if (trails === "error") {
+    const trails: Promise<any> = await NationalParksFetcher.findTrails();
+    if (await trails === "error") {
       return res.status(500).send({ message: "Error fetching trails" });
     }
     res.status(200).send(trails);
@@ -42,12 +42,13 @@ router.get("/trails", async (req: Request, res: Response): Promise<any> => {
   }
 });
 
+// Route to find campgrounds
 router.get('/campgrounds/:stateCode', async (req: Request, res: Response): Promise<any> => {
   try {
     const stateCode: string = req.params.stateCode;
-    const campgroundData = await NationalParksFetcher.findCampgrounds(stateCode);
+    const campgroundData: Promise<any> = await NationalParksFetcher.findCampgrounds(stateCode);
 
-    if(campgroundData === 'error') {
+    if(await campgroundData === 'error') {
       return res.status(500).send({ message: "Error fetching campgrounds" });
     }
 
