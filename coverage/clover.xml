@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1716311074524" clover="3.2.0">
-  <project timestamp="1716311074524" name="All files">
-    <metrics statements="159" coveredstatements="144" conditionals="17" coveredconditionals="16" methods="19" coveredmethods="18" elements="195" coveredelements="178" complexity="0" loc="159" ncloc="159" packages="7" files="9" classes="9"/>
+<coverage generated="1716322470788" clover="3.2.0">
+  <project timestamp="1716322470789" name="All files">
+    <metrics statements="159" coveredstatements="143" conditionals="17" coveredconditionals="16" methods="19" coveredmethods="18" elements="195" coveredelements="177" complexity="0" loc="159" ncloc="159" packages="7" files="9" classes="9"/>
     <package name="src">
       <metrics statements="15" coveredstatements="15" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
       <file name="app.ts" path="C:\Users\TJ\Desktop\vis-studio\Nelly's_Newest_Challenge\Travelers_R_Us_Backend\src\app.ts">
@@ -60,41 +60,41 @@
         <metrics statements="31" coveredstatements="28" conditionals="6" coveredconditionals="6" methods="6" coveredmethods="6"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="2" type="stmt"/>
-        <line num="4" count="2" type="stmt"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="6" count="3" type="stmt"/>
         <line num="7" count="3" type="stmt"/>
-        <line num="8" count="3" type="stmt"/>
-        <line num="10" count="3" type="cond" truecount="3" falsecount="0"/>
-        <line num="11" count="1" type="stmt"/>
+        <line num="9" count="3" type="cond" truecount="3" falsecount="0"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="15" count="2" type="stmt"/>
         <line num="16" count="2" type="stmt"/>
-        <line num="17" count="2" type="stmt"/>
+        <line num="18" count="2" type="stmt"/>
         <line num="19" count="2" type="stmt"/>
-        <line num="20" count="2" type="stmt"/>
-        <line num="24" count="2" type="cond" truecount="1" falsecount="0"/>
-        <line num="25" count="1" type="stmt"/>
-        <line num="27" count="1" type="stmt"/>
-        <line num="29" count="0" type="stmt"/>
+        <line num="23" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="33" count="2" type="stmt"/>
         <line num="34" count="2" type="stmt"/>
         <line num="35" count="2" type="stmt"/>
-        <line num="36" count="2" type="stmt"/>
-        <line num="37" count="2" type="cond" truecount="1" falsecount="0"/>
-        <line num="38" count="1" type="stmt"/>
-        <line num="40" count="1" type="stmt"/>
-        <line num="42" count="0" type="stmt"/>
+        <line num="36" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="37" count="1" type="stmt"/>
+        <line num="39" count="1" type="stmt"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="46" count="2" type="stmt"/>
         <line num="47" count="2" type="stmt"/>
         <line num="48" count="2" type="stmt"/>
         <line num="49" count="2" type="stmt"/>
-        <line num="50" count="2" type="stmt"/>
-        <line num="52" count="2" type="cond" truecount="1" falsecount="0"/>
-        <line num="53" count="1" type="stmt"/>
-        <line num="56" count="1" type="stmt"/>
-        <line num="58" count="0" type="stmt"/>
-        <line num="64" count="2" type="stmt"/>
+        <line num="51" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="52" count="1" type="stmt"/>
+        <line num="55" count="1" type="stmt"/>
+        <line num="57" count="0" type="stmt"/>
+        <line num="63" count="2" type="stmt"/>
       </file>
     </package>
     <package name="src.controllers.user">
-      <metrics statements="55" coveredstatements="51" conditionals="6" coveredconditionals="6" methods="8" coveredmethods="8"/>
+      <metrics statements="55" coveredstatements="50" conditionals="6" coveredconditionals="6" methods="8" coveredmethods="8"/>
       <file name="auth.ts" path="C:\Users\TJ\Desktop\vis-studio\Nelly's_Newest_Challenge\Travelers_R_Us_Backend\src\controllers\user\auth.ts">
-        <metrics statements="50" coveredstatements="46" conditionals="6" coveredconditionals="6" methods="8" coveredmethods="8"/>
+        <metrics statements="50" coveredstatements="45" conditionals="6" coveredconditionals="6" methods="8" coveredmethods="8"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="2" type="stmt"/>
         <line num="3" count="2" type="stmt"/>
@@ -143,8 +143,8 @@
         <line num="113" count="1" type="stmt"/>
         <line num="114" count="1" type="stmt"/>
         <line num="119" count="1" type="stmt"/>
-        <line num="120" count="1" type="stmt"/>
-        <line num="124" count="2" type="stmt"/>
+        <line num="121" count="0" type="stmt"/>
+        <line num="125" count="2" type="stmt"/>
       </file>
       <file name="index.ts" path="C:\Users\TJ\Desktop\vis-studio\Nelly's_Newest_Challenge\Travelers_R_Us_Backend\src\controllers\user\index.ts">
         <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>

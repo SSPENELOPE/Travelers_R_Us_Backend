@@ -73,7 +73,7 @@ router.post("/login", async (req: Request, res: Response): Promise<any> => {
         .json({ message: "Credentials are not recognized" });
     } else {
       // If the credentials are valid, generate a JWT
-      const token: string = jwt.sign({ userId: user._id }, secretKey, {
+        const token: string = jwt.sign({ userId: user._id }, secretKey, {
         expiresIn: "1h", // Token expiration time
       });
 
@@ -109,16 +109,17 @@ router.get("/isLoggedIn", async (req: Request, res: Response): Promise<any> => {
 });
 
 // LOGOUT
-router.post("/logout", (req: Request, res: Response): Promise<void> => {
-  return new Promise((resolve, reject) => {
-    res.clearCookie("TRUT", {
-      httpOnly: true,
-      secure: false, // Change this when pushing to prod
-    });
+router.post("/logout", async (req: Request, res: Response): Promise<void> => {
+  try {
+      res.clearCookie("TRUT", {
+        httpOnly: true,
+        secure: false, // Change this when pushing to prod
+      });
 
-    res.status(200).json({ message: "Logout successful" });
-    resolve();
-  });
+      res.status(200).json({ message: "Logout successful" });
+  } catch (error) {
+    res.status(500).json({message: "Internal server error"})
+  }
 });
 
 export default router;

@@ -12,8 +12,8 @@ router.get("/parks", async (req: Request, res: Response): Promise<any> => {
       .send({ message: "Page and limit query parameters are required" });
   }
 
-  const pageNumber = parseInt(page as string, 10);
-  const limitNumber = parseInt(limit as string, 10);
+  const pageNumber: number = parseInt(page as string, 10);
+  const limitNumber: number = parseInt(limit as string, 10);
 
   try {
     const parks: Promise<any> = await NationalParksFetcher.fetchParks(
