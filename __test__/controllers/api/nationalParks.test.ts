@@ -80,7 +80,8 @@ describe("National Parks Router", () => {
 
   // GET CAMPGROUND TEST ROUTE
   describe("GET /campgrounds", () => {
-    it("should respond with campground by state", async () => {
+    // Success
+    it("should respond with campgrounds by state", async () => {
       const mockCampgrounds = [{ name: "Campground 1"}, { name: "Campground 2"}];
       (NationalParksHandler.findCampgrounds as jest.Mock).mockResolvedValue(mockCampgrounds)
 
@@ -91,6 +92,7 @@ describe("National Parks Router", () => {
       expect(response.body).toEqual(mockCampgrounds);
     });
 
+    // Error
     it("should handle error when fetching campgrounds", async () => {
       (NationalParksHandler.findCampgrounds as jest.Mock).mockResolvedValue("error");
 
