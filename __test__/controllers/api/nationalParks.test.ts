@@ -1,5 +1,5 @@
 import request from "supertest";
-import NationalParksHandler from "../../../src/utils/nationalParksHandler";
+import NationalParksHandler from "../../../src/utils/fireBaseAPI";
 import app from "../../../src/app";
 
 jest.mock("../../../src/utils/nationalParksHandler", () => ({

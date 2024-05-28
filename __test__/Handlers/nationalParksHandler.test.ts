@@ -5,7 +5,7 @@
  */
 
 import fetchMock from "fetch-mock";
-import NationalParksHandler from "../../src/utils/nationalParksHandler";
+import NationalParksHandler from "../../src/utils/fireBaseAPI";
 import dotenv from "dotenv";
 import { RequestOptions } from "https";
 

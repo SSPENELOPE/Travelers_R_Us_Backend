@@ -1,10 +1,10 @@
 import { Router, Request, Response } from "express";
-import NationalParksFetcher from "../../utils/nationalParksHandler";
+import FireBaseAPI from "../../utils/fireBaseAPI";
 const router: Router = Router();
 
 // Route to find parks
 router.get("/parks", async (req: Request, res: Response): Promise<any> => {
-  const { page, limit } = req.query;
+  const { page, limit } = req.query as { page: string, limit: string }; 
 
   if (!page || !limit) {
     return res
@@ -12,33 +12,33 @@ router.get("/parks", async (req: Request, res: Response): Promise<any> => {
       .send({ message: "Page and limit query parameters are required" });
   }
 
-  const pageNumber: number = parseInt(page as string, 10);
-  const limitNumber: number = parseInt(limit as string, 10);
-
   try {
-    const parks: Promise<any> = await NationalParksFetcher.fetchParks(
-      pageNumber,
-      limitNumber
+    const parks: Promise<any> = await FireBaseAPI.fetchParks(
+      page,
+      limit
     );
+
     if (await parks === "error") {
-      return res.status(500).send({ message: "Error fetching parks" });
+      return res.status(500).json({ message: "Error fetching parks" });
     }
-    res.status(200).send(parks);
+    
+    res.status(200).json(parks);
   } catch (error) {
-    res.status(500).send({ message: "Server error", error });
+    res.status(500).json({ message: "Server error", error });
   }
 });
 
 // Route to find trails
 router.get("/trails", async (req: Request, res: Response): Promise<any> => {
+  const state: string = req.query.state as string;
   try {
-    const trails: Promise<any> = await NationalParksFetcher.findTrails();
+    const trails: Promise<any> = await FireBaseAPI.findTrails(state);
     if (await trails === "error") {
-      return res.status(500).send({ message: "Error fetching trails" });
+      return res.status(500).json({ message: "Error fetching trails" });
     }
-    res.status(200).send(trails);
+    res.status(200).json(trails);
   } catch (error) {
-    res.status(500).send({ message: "Server error", error });
+    res.status(500).json({ message: "Server error", error });
   }
 });
 
@@ -46,15 +46,15 @@ router.get("/trails", async (req: Request, res: Response): Promise<any> => {
 router.get('/campgrounds/:stateCode', async (req: Request, res: Response): Promise<any> => {
   try {
     const stateCode: string = req.params.stateCode;
-    const campgroundData: Promise<any> = await NationalParksFetcher.findCampgrounds(stateCode);
+    const campgroundData: Promise<any> = await FireBaseAPI.findCampgrounds(stateCode);
 
     if(await campgroundData === 'error') {
-      return res.status(500).send({ message: "Error fetching campgrounds" });
+      return res.status(500).json({ message: "Error fetching campgrounds" });
     }
 
     res.status(200).json(campgroundData);
   } catch (error) {
-    res.status(500).send({ message: "Server error", error });
+    res.status(500).json({ message: "Server error", error });
   }
 })
 
